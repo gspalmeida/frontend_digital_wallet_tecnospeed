@@ -8,8 +8,9 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 import ButtonApprove from "../ButtonApprove";
-import ButtonDisaprove from "../ButtonDisaprove";
+import ButtonReprove from "../ButtonReprove";
 import api from "../../services/api";
+import ButtonDelete from "../ButtonDelete";
 
 interface IUsersTable {
   users: {
@@ -20,20 +21,24 @@ interface IUsersTable {
     allowAccess: boolean,
     status: string,
   }[];
-  getUsers: () => Promise<void>;
+  updateUserLists(): any;
 }
 
 const UsersTable: React.FC<IUsersTable> = ({
   users,
-  getUsers,
+  updateUserLists,
 }) => {
   const approveUser = async (id: string) => {
-    await api.put(`/admins/users/${id}`);
-    getUsers();
+    await api.put(`/admins/approveUser/${id}`);
+    updateUserLists();
+  };
+  const reproveUser = async (id: string) => {
+    await api.put(`/admins/reproveUser/${id}`);
+    updateUserLists();
   };
   const deleteUser = async (id: string) => {
     await api.delete(`/admins/users/${id}`);
-    getUsers();
+    updateUserLists();
   };
 
   return (
@@ -58,10 +63,17 @@ const UsersTable: React.FC<IUsersTable> = ({
               <TableCell align="left">{user.email}</TableCell>
               <TableCell align="left">
                 {user.allowAccess === false && "Aguardando Aprovação"}
+                {user.allowAccess === true && "Liberado"}
               </TableCell>
-              <TableCell align="right" style={{ display: "flex" }}>
-                <ButtonDisaprove onClick={() => deleteUser(user.id)} />
-                <ButtonApprove onClick={() => approveUser(user.id)} />
+              <TableCell align="center" style={{ display: "flex" }}>
+                {
+                  user.allowAccess === false && 
+                  <> 
+                    <ButtonApprove onClick={() => approveUser(user.id)} />
+                    <ButtonReprove onClick={() => reproveUser(user.id)} /> 
+                  </>
+                }
+                {user.allowAccess === true && <ButtonDelete onClick={() => deleteUser(user.id)} />}
               </TableCell>
             </TableRow>
           ))}
