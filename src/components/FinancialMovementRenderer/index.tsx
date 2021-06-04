@@ -7,19 +7,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import ButtonDelete from "../ButtonDelete";
-import ButtonEdit from "../ButtonEdit";
-import api from "../../services/api";
-
-interface FinancialMovementDetail {
-  id: string;
-  isMoneyIn: boolean;
-  description: string;
-  categoryName: string;
-  value: string;
-  date: string;
-}
-
 interface IMyTable {
   financialMovements: {
     id: string;
@@ -30,30 +17,12 @@ interface IMyTable {
     date: string;
   }[];
   getFinancialMovements: () => Promise<void>;
-  setFinancialMovementsModalState: React.Dispatch<React.SetStateAction<boolean>>;
-  setModalFinancialMovementDetail: React.Dispatch<React.SetStateAction<FinancialMovementDetail>>;
 }
 
 const MyTable: React.FC<IMyTable> = ({
   financialMovements,
   getFinancialMovements,
-  setFinancialMovementsModalState,
-  setModalFinancialMovementDetail,
 }) => {
-  const deleteFinancialMovement = async (id: string) => {
-    await api.delete(`/services/${id}`);
-    getFinancialMovements();
-  };
-  const editFinancialMovement = (id: string) => {
-    const financialMovement = financialMovements.find((financialMovement) => financialMovement.id === id);
-
-    setFinancialMovementsModalState(true);
-    if (financialMovement) {
-      setModalFinancialMovementDetail(financialMovement);
-    } else {
-      setModalFinancialMovementDetail({} as FinancialMovementDetail);
-    }
-  };
 
   return (
     <TableContainer component={Paper} style={{ marginTop: 30 }}>
