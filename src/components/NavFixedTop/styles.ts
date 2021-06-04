@@ -24,7 +24,7 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const Brand = styled.h1`
+export const WalletBalance = styled.h1`
   color: #ebebeb;
 `;
 

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState} from "react";
 import { useHistory } from "react-router-dom";
 
 import { useAuth } from '../../hooks/auth';
+import api from "../../services/api";
 
 import {
   Container,
@@ -12,7 +13,7 @@ import {
   Username,
   Button,
   ButtonSm,
-  Brand,
+  WalletBalance,
   Center,
 } from "./styles";
 
@@ -23,6 +24,7 @@ interface ParsedUserProps {
 
 
 const NavFixedTop: React.FC = () => {
+  const [walletBalance, setWalletBalance] = useState('');
   let parsedUser: ParsedUserProps = {avatar:'', name:'Saindo...'};
   const history = useHistory();
   
@@ -40,11 +42,25 @@ const NavFixedTop: React.FC = () => {
     parsedUser = {avatar: parsedProvider.avatar, name: parsedProvider.name};
   }
 
+  const getWalletBalance = async () => {
+    const { data } = await api.get("/users/saldo");
+
+    console.log(data);
+
+    setWalletBalance(data);
+  };
+
+  useEffect(() => {
+    getWalletBalance();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
         <Left>
-          <Brand>Digital Wallet</Brand>
+          {walletBalance!=='' && 
+            <WalletBalance>Saldo: {walletBalance}</WalletBalance>
+          }
         </Left>
         <Center>
           {user!=='undefined' && 
