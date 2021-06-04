@@ -3,6 +3,7 @@ import FinancialMovementRenderer from "../../components/FinancialMovementRendere
 import FinancialMovementCategoryModal from "../../components/FinancialMovementCategoryModal";
 import FinancialMovementCategoriesRenderer from "../../components/FinancialMovementCategoriesRenderer";
 import Header from "../../components/NavFixedTop";
+import {CSVLink} from 'react-csv';
 
 import { Container, Title } from "./styles";
 import api from "../../services/api";
@@ -77,6 +78,19 @@ const HomeUser: React.FC = () => {
     }
   }, [categoriesModalState]);
 
+  const csvHeaders = [
+    {label: 'Descrição', key: 'description'},
+    {label: 'Categoria da Movimentação', key: 'categoryName'},
+    {label: 'Valor', key: 'value'},
+    {label: 'Data', key: 'date'},
+    {label: 'É Entrada?', key: 'isMoneyIn'},
+  ];
+  const csvReport = {
+    filename: "Movimentações Financeiras.csv",
+    headers: csvHeaders,
+    data: financialMovements
+  }
+
   return (
     <>
       <Header />
@@ -89,6 +103,8 @@ const HomeUser: React.FC = () => {
             getFinancialMovements={getFinancialMovements}
           />
         ): <p><br/>Nenhuma Movimentação Financeira Cadastrada</p>}
+        
+        <CSVLink {...csvReport}>Exportar Movimentações para CSV</CSVLink>
         
         <Title>Categorias de Movimentações</Title>
         {movementCategories[0] ? (
