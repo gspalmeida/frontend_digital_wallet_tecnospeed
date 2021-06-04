@@ -7,9 +7,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import ButtonDelete from "../ButtonDelete";
 import ButtonEdit from "../ButtonEdit";
-import api from "../../services/api";
 
 interface MovementCategoryDetail {
   id: string;
@@ -32,10 +30,6 @@ const ServiceTypesRenderer: React.FC<IMyTable> = ({
   setModalCategoryDetail,
   getMovementCategories,
 }) => {
-  const deleteCategory = async (id: string) => {
-    await api.delete(`/categories/${id}`);
-    getMovementCategories();
-  };
   const editCategory = (id: string) => {
     const category = movementCategories.find((movementCategory) => movementCategory.id === id);
 
@@ -63,7 +57,6 @@ const ServiceTypesRenderer: React.FC<IMyTable> = ({
                 {category.categoryName}
               </TableCell>
               <TableCell align="right" style={{ display: "flex" }}>
-                <ButtonDelete onClick={() => deleteCategory(category.id)} />
                 <ButtonEdit onClick={() => editCategory(category.id)} />
               </TableCell>
             </TableRow>
