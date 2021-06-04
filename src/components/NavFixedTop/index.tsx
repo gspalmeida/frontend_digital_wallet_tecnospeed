@@ -45,9 +45,14 @@ const NavFixedTop: React.FC = () => {
         <Left>
           <Brand>Digital Wallet</Brand>
           {user!=='undefined' && 
-            <Button color="#2dab03" onClick={()=>{history.push('/novamovimentacao')}}>
-              Nova Movimentação Financeira
-            </Button>
+            <>
+              <Button color="#2dab03" onClick={()=>{history.push('/novamovimentacao')}}>
+                Nova Movimentação Financeira
+              </Button>
+              <Button color="#2dab03" onClick={()=>{history.push('/categories')}}>
+                Nova Categoria
+              </Button>
+            </>
           }
         </Left>
         <Right>
