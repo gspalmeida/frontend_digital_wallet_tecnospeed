@@ -22,16 +22,19 @@ interface MovementCategoryInterface {
   inputValue?:string;
 } 
 
-
 const filter = createFilterOptions<MovementCategoryInterface>();
-
 
 const CreateFinancialMovement: React.FC = () => {
   const history = useHistory();
   
-  const [isMoneyIn, setIsMoneyIn] = React.useState('true');
+  const [isMoneyIn, setIsMoneyIn] = React.useState(true);
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsMoneyIn((event.target as HTMLInputElement).value);
+    console.log((event.target as HTMLInputElement).value);
+    if((event.target as HTMLInputElement).value==='false'){
+      setIsMoneyIn(false);
+    }else{
+      setIsMoneyIn(true);
+    }
   };
 
   const [financialMovementCategories, setFinancialMovementCategories] = useState<MovementCategoryInterface[]>([{id:'string', categoryName:'nome'}])
@@ -104,9 +107,9 @@ const CreateFinancialMovement: React.FC = () => {
 
         <FormControl component="fieldset" style={{alignItems:'center'}}>
           <FormLabel component="legend" style={{width:'100%', textAlign:'center', color:'#000', fontWeight:'bolder', paddingBottom:'8px'}}>Tipo da Movimentação</FormLabel>
-          <RadioGroup row aria-label="isMoneiIn" name="isMoneyIn" value={isMoneyIn} onChange={handleRadioChange}>
-            <FormControlLabel value="true" control={<Radio />} label="Entrada" />
-            <FormControlLabel value="false" control={<Radio />} label="Saida" />
+          <RadioGroup row aria-label="isMoneyIn" name="isMoneyIn" value={isMoneyIn} onChange={handleRadioChange}>
+            <FormControlLabel value={true} control={<Radio />} label="Entrada" />
+            <FormControlLabel value={false} control={<Radio />} label="Saida" />
           </RadioGroup>
         </FormControl>
 
