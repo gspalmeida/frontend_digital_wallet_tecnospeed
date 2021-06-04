@@ -13,6 +13,7 @@ import {
   Button,
   ButtonSm,
   Brand,
+  Center,
 } from "./styles";
 
 interface ParsedUserProps {
@@ -44,6 +45,8 @@ const NavFixedTop: React.FC = () => {
       <Wrapper>
         <Left>
           <Brand>Digital Wallet</Brand>
+        </Left>
+        <Center>
           {user!=='undefined' && 
             <>
               <Button color="#2dab03" onClick={()=>{history.push('/novamovimentacao')}}>
@@ -54,7 +57,7 @@ const NavFixedTop: React.FC = () => {
               </Button>
             </>
           }
-        </Left>
+        </Center>
         <Right>
           <Avatar src={'http://localhost:1919/files/'+parsedUser.avatar} />
           <Username>{parsedUser.name}</Username>

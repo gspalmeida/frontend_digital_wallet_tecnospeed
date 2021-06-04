@@ -30,8 +30,14 @@ export const Brand = styled.h1`
 
 export const Left = styled.div`
   display: flex;
+  align-items: left;
+`;
+
+export const Center = styled.div`
+  display: flex;
   align-items: center;
 `;
+
 
 export const NewServiceLink = styled(Link)`
   margin-left: 30px;
@@ -47,7 +53,7 @@ export const NewServiceLink = styled(Link)`
 `;
 export const Right = styled.div`
   display: flex;
-  align-items: center;
+  align-items: right;
 `;
 
 export const Avatar = styled.img`
@@ -60,6 +66,8 @@ export const Username = styled.span`
   margin-left: 15px;
   color: #fff;
   font-size: 15px;
+  margin-top: auto;
+  margin-bottom: auto;
 `;
 
 export const Button = styled.button<IButton>`
