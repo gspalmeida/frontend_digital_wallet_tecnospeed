@@ -6,6 +6,7 @@ import Header from "../../components/NavFixedTop";
 
 import { Container, Title } from "./styles";
 import api from "../../services/api";
+import FilterByDate from "../../components/FilterByDate";
 
 interface CategoryInterface {
   id: string;
@@ -26,7 +27,6 @@ const HomeUser: React.FC = () => {
   const [financialMovements, setFinancialMovements] = useState<FinancialMovementInterface[]>([{} as FinancialMovementInterface]);
   const getFinancialMovements = async () => {
     const { data } = await api.get("/movements");
-    console.log(data);
 
     const financialMovementsData = data.map((financialMovement: any) => {
       const {
@@ -81,13 +81,15 @@ const HomeUser: React.FC = () => {
     <>
       <Header />
       <Container>
-      <Title>Movimentações Financeiras</Title>
+        <Title>Movimentações Financeiras</Title>
+        <FilterByDate setFinancialMovements={setFinancialMovements}/>
         {financialMovements[0] ? (
           <FinancialMovementRenderer
             financialMovements={financialMovements}
             getFinancialMovements={getFinancialMovements}
           />
-        ): <p>Nenhuma Movimentação Financeira Cadastrada</p>}
+        ): <p><br/>Nenhuma Movimentação Financeira Cadastrada</p>}
+        
         <Title>Categorias de Movimentações</Title>
         {movementCategories[0] ? (
           <FinancialMovementCategoriesRenderer
