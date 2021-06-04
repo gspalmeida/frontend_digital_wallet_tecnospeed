@@ -3,7 +3,7 @@
 ##### Descrição
 Projeto criado para a avaliação de conhecimento técnico da TecnoSpeed para a vaga de Node.js (mas também ligada a front). **Farei o deploy do front em alguma infra gratuita (vercel ou heroku) e disponibilizarei um link aqui para o acesso.**
 
-**Link:** [Acessar o Front Online (Disponível a Partir de Sábado)](linkInvalido){:target="_blank"}
+**Link:** [Acessar o Front Online (Disponível a Partir de Sábado)](linkInvalido)
 
 Credênciais de acesso:
 
