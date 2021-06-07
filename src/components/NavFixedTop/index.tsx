@@ -51,8 +51,10 @@ const NavFixedTop: React.FC = () => {
   };
 
   useEffect(() => {
-    getWalletBalance();
-  }, []);
+    if (user!=='undefined'){
+      getWalletBalance();
+    }
+  }, [user]);
 
   return (
     <Container>
@@ -75,7 +77,7 @@ const NavFixedTop: React.FC = () => {
           }
         </Center>
         <Right>
-          <Avatar src={'http://localhost:1919/files/'+parsedUser.avatar} />
+          <Avatar src={process.env.REACT_APP_API_URL + 'files/'+parsedUser.avatar} />
           <Username>{parsedUser.name}</Username>
           <ButtonSm outlined color="#ffffff" onClick={() => {
             history.push('/');
